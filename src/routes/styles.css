@@ -370,3 +370,7 @@ button.primary,
   animation: spin 1s linear infinite;
   filter: invert(1);
 }
+
+form input[type=date] {
+  max-width: fit-content;
+}
