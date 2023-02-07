@@ -1,22 +1,32 @@
 <script lang="ts">
-  import { supabase } from '$lib/supabaseClient'
-  import { invalidate } from '$app/navigation'
-  import { onMount } from 'svelte'
-  import './styles.css'
+	import '@skeletonlabs/skeleton/styles/all.css';
+	import '../theme.postcss';
+	import '../app.postcss';
+	import { supabase } from '$lib/supabaseClient';
+	import { invalidate } from '$app/navigation';
+	import { onMount } from 'svelte';
+	import { AppShell, Modal, modalStore } from '@skeletonlabs/skeleton';
+	import Header from '../components/Header.svelte';
+	import Footer from '../components/Footer.svelte';
 
-  onMount(() => {
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange(() => {
-      invalidate('supabase:auth')
-    })
+	onMount(() => {
+		const {
+			data: { subscription }
+		} = supabase.auth.onAuthStateChange(() => {
+			invalidate('supabase:auth');
+		});
 
-    return () => {
-      subscription.unsubscribe()
-    }
-  })
+		return () => {
+			subscription.unsubscribe();
+		};
+	});
 </script>
 
-<div class="container" style="padding: 50px 0 100px 0">
-  <slot />
-</div>
+<AppShell>
+	<svelte:fragment slot="header"><Header /></svelte:fragment>
+
+	<slot />
+
+	<svelte:fragment slot="footer"><Footer /></svelte:fragment>
+</AppShell>
+<Modal />

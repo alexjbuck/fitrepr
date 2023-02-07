@@ -20,12 +20,11 @@
 			loading = true;
 			const { user } = session;
 
-			const { data, error, status } = await supabase
-				.from('accomplishments')
-				.select(`*`);
+			const { data, error, status } = await supabase.from('accomplishments').select(`*`);
 
 			if (data) {
 				accomplishments.set(data);
+				$accomplishments.sort((a,b)=> a.date.localeCompare(b.date));
 			}
 			if (error && status !== 406) throw error;
 		} catch (error) {
@@ -38,10 +37,11 @@
 	};
 </script>
 
-<div>
-	{#each $accomplishments as accomplishment}
-		<div>
-			<AccomplishmentEntry entry={accomplishment} />
-		</div>
-	{/each}
-</div>
+
+<ul class="list">
+{#each $accomplishments as accomplishment}
+	<li>
+		<AccomplishmentEntry entry={accomplishment} />
+	</li>
+{/each}
+</ul>

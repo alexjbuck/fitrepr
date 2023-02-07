@@ -5,10 +5,10 @@
 	export let entry: Accomplishment;
 
 	let readonly = true;
-    let deleting = false;
+	let deleting = false;
 
 	const handleDelete = async () => {
-        deleting = true;
+		deleting = true;
 		let confirmed = confirm('Are you sure you want to delete?');
 		if (confirmed == false) {
 			return;
@@ -28,35 +28,44 @@
 				.from('accomplishments')
 				.update({ description: entry.description, date: entry.date })
 				.eq('id', entry.id);
-            
-            $accomplishments[$accomplishments.findIndex((e) => e.id == entry.id)] = entry;
+
+			$accomplishments[$accomplishments.findIndex((e) => e.id == entry.id)] = entry;
+			$accomplishments.sort((a,b)=> a.date.localeCompare(b.date));
 		} catch (err) {
-            console.log(err);
-        }
+			console.log(err);
+		}
 	};
 </script>
 
-<style>
-    .editable {
-        background-color: #ff3e00;
-		color: white;
-    }
-    input[type=text] {
-        border: 1px solid #222;
-    }
-</style>
-
-<form class="flex">
-	<input class="col-8" class:editable="{readonly===false}" type="text" bind:value={entry.description} {readonly}/>
-	<input type="date" name="date" id="dateinput" bind:value={entry.date} {readonly}/>
+<form class="input-group input-group-divider flex flex-row">
+	<input
+		class:editable={readonly === false}
+		class="flex-grow"
+		type="text"
+		bind:value={entry.description}
+		{readonly}
+	/>
+	<input
+		type="date"
+		class="max-w-fit"
+		name="date"
+		id="dateinput"
+		bind:value={entry.date}
+		{readonly}
+	/>
 	{#if readonly}
 		<button
+			class="btn btn-base variant-ghost-primary min-w-[6em]"
 			on:click={() => {
 				readonly = false;
 			}}>Edit</button
 		>
 	{:else}
-		<button class="primary button" on:click={handleUpdate}>Update</button>
+		<button class="btn btn-base variant-ghost-primary min-w-[6em]" on:click={handleUpdate}
+			>Update</button
+		>
 	{/if}
-	<button on:click={handleDelete}>{deleting ? "Deleting...":"Delete"}</button>
+	<button class="btn btn-base variant-ghost-primary min-w-[6em]" on:click={handleDelete}
+		>{deleting ? '...' : 'Delete'}</button
+	>
 </form>

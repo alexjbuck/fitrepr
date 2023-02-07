@@ -20,20 +20,20 @@
 	};
 </script>
 
-<form class="row flex-center flex" on:submit|preventDefault={handleLogin}>
-	<div class="col-6 form-widget">
-		<h1 class="header">Login or Register</h1>
-		<p class="description">Sign in via magic link with your email below</p>
-		<div>
-			<input class="inputField" type="email" placeholder="Your email" bind:value={email} />
-		</div>
-		<div>
+<div class="card max-w-md ml-auto mr-auto mt-8 p-8">
+	<form class="row" on:submit|preventDefault={handleLogin}>
+		<h2 class="header">Login</h2>
+		<p class="description">
+			Join in the magic of automated fitreps, sign in via magic link with your email below!
+		</p>
+		<div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
+			<input type="email" placeholder="Your email" bind:value={email} />
 			<input
 				type="submit"
-				class="button block"
+				class="variant-filled-primary"
 				value={loading ? 'Loading' : 'Send magic link'}
 				disabled={loading}
 			/>
 		</div>
-	</div>
-</form>
+	</form>
+</div>

@@ -8,14 +8,18 @@
 
 <svelte:head>
 	<title>Fitrepr</title>
-	<meta name="description" content="SvelteKit using supabase-js v2" />
+	<meta name="description" content="Fitrepr. Automate your fitrep!" />
 </svelte:head>
 
-<h1>Fitrepr</h1>
-{#if !$page.data.session}
-	<Auth />
-{:else}
-	<Account session={$page.data.session} />
-	<AccomplishmentForm />
-	<AccomplishmentList session={$page.data.session} />
-{/if}
+<div class="lg:flex lg:flex-row">
+	{#if !$page.data.session}
+		<Auth />
+	{:else}
+	<div class="lg:w-2xl">
+		<AccomplishmentForm />
+	</div>
+	<div class="lg:flex-grow">
+		<AccomplishmentList session={$page.data.session} />
+	</div>
+	{/if}
+</div>
