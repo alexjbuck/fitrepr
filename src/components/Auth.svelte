@@ -31,7 +31,7 @@
 			<input
 				type="submit"
 				class="variant-filled-primary"
-				value={loading ? 'Loading' : 'Send magic link'}
+				value={loading ? 'Loading' : 'Login'}
 				disabled={loading}
 			/>
 		</div>
