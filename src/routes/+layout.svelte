@@ -8,6 +8,7 @@
 	import { AppShell, Modal, modalStore } from '@skeletonlabs/skeleton';
 	import Header from '../components/Header.svelte';
 	import Footer from '../components/Footer.svelte';
+	import { fade } from 'svelte/transition';
 
 	onMount(() => {
 		const {
