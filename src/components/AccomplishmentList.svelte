@@ -1,15 +1,10 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import type { AuthSession } from '@supabase/supabase-js';
+	import AccomplishmentEntry from '$components/AccomplishmentEntry.svelte';
 	import { supabase } from '$lib/supabaseClient';
-	import AccomplishmentEntry from './AccomplishmentEntry.svelte';
 	import { accomplishments } from '../store';
-
-	export let session: AuthSession;
+	import { onMount } from 'svelte';
 
 	let loading = false;
-	let website: string | null = null;
-	let avatarUrl: string | null = null;
 
 	onMount(() => {
 		getAccomplishments();
@@ -18,7 +13,6 @@
 	const getAccomplishments = async () => {
 		try {
 			loading = true;
-			const { user } = session;
 
 			const { data, error, status } = await supabase.from('accomplishments').select(`*`);
 
