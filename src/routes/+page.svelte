@@ -20,6 +20,6 @@
 		<div class="lg:flex-grow">
 			<AccomplishmentList session={$page.data.session} />
 		</div>
+		<a href="/reports" class="btn btn-base variant-filled-primary">New Report</a>
 	{/if}
-	<a href="/reports" class="btn btn-base variant-filled-primary">New Report</a>
 </div>

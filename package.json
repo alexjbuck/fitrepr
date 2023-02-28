@@ -3,7 +3,8 @@
 	"version": "0.0.2",
 	"private": true,
 	"scripts": {
-		"dev": "vite dev",
+		"dev": "supabase start && vite dev",
+		"db-stop": "supabase stop",
 		"build": "vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync",
