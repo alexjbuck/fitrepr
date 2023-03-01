@@ -1,7 +1,7 @@
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { error, redirect, type RequestHandler } from '@sveltejs/kit';
 import { stripIndent, oneLine } from 'common-tags';
-import { ChatCompletionRequestMessageRoleEnum, type CreateCompletionRequest } from 'openai';
+import type { CreateCompletionRequest } from 'openai';
 import { SECRET_OPENAI_KEY } from '$env/static/private'
 
 export const GET: RequestHandler = async (event) => {
