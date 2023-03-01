@@ -84,5 +84,5 @@
 		<input required type="date" name="end" bind:value={end} />
 		<button type="submit" class="btn btn-base variant-filled-secondary">Submit</button>
 	</form>
-	<textarea bind:value={report}></textarea>
+	<p>{report}</p>
 </div>

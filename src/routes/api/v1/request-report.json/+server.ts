@@ -1,7 +1,7 @@
 import { getSupabase } from '@supabase/auth-helpers-sveltekit';
 import { error, redirect, type RequestHandler } from '@sveltejs/kit';
 import { stripIndent, oneLine } from 'common-tags';
-import type { CreateCompletionRequest } from 'openai';
+import { ChatCompletionRequestMessageRoleEnum, type CreateCompletionRequest } from 'openai';
 import { SECRET_OPENAI_KEY } from '$env/static/private'
 
 export const GET: RequestHandler = async (event) => {
@@ -75,7 +75,7 @@ export const POST: RequestHandler = async (event) => {
     Output:`
 
     const completionOpts: CreateCompletionRequest = {
-      model: 'gpt-3.5-turbo',
+      model: 'text-davinci-003',
       prompt,
       max_tokens: 1000,
       temperature: 0.75,
