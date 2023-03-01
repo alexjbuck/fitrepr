@@ -75,9 +75,9 @@ export const POST: RequestHandler = async (event) => {
     Output:`
 
     const completionOpts: CreateCompletionRequest = {
-      model: 'text-davinci-003',
+      model: 'gpt-3.5-turbo',
       prompt,
-      max_tokens: 800,
+      max_tokens: 1000,
       temperature: 0.75,
       stream: true
     }
