@@ -1,7 +1,9 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import { supabase } from '$lib/supabaseClient';
 	import type { CreateCompletionResponse } from 'openai';
 	import { SSE } from 'sse.js';
+	import { user_name } from '../../store';
 
 	let loading = false;
 	let error_flag = false;
@@ -15,7 +17,7 @@
 		error_flag = false;
 		console.log(start, end);
 
-		const { data, error, status } = await supabase
+		const { data } = await supabase
 			.from('accomplishments')
 			.select(`*`)
 			.lte('date', end)
@@ -24,10 +26,15 @@
 			return new Date(a.date).getTime() - new Date(b.date).getTime();
 		});
 		console.log(data);
-		let details = '';
+
+		console.log($user_name)
+
+		let details = `Name: ${$user_name}\n`;
+		
 		data?.forEach((entry, index) => {
 			details += `Detail ${index + 1}: ${entry.description}\n`;
 		});
+		
 		console.log(details);
 		const eventSource = new SSE('/api/v1/request-report.json', {
 			headers: {

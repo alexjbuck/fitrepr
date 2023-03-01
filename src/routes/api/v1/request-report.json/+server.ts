@@ -52,7 +52,7 @@ export const POST: RequestHandler = async (event) => {
 
     This is an example:
     Details:
-    Name: LT Buck
+    Name and Rank: {{name}}
     Unit: HSMWSP
     Detail 1: instructed 3 events during HARP 1903 and led two events as Range Training Officer
     Detail 2: was the mission planning subject matter expert (SME).
@@ -63,13 +63,13 @@ export const POST: RequestHandler = async (event) => {
     Output:
     ***A RISING STAR IN HSM WING PACIFIC'S MOST COMPETITIVE WARDROOM!***
 
-    - EXPERT INSTRUCTOR. LT Buck continues to display great enthusiasm for student interaction and engagement. He expertly instructed three flight events during HARP 1903 and effortlessly led two events as Range Training Officer. As mission planning SME, he put in countless additional hours assisting crews with mission planning and flight briefs.
+    - EXPERT INSTRUCTOR. {{name}} continues to display great enthusiasm for student interaction and engagement. He expertly instructed three flight events during HARP 1903 and effortlessly led two events as Range Training Officer. As mission planning SME, he put in countless additional hours assisting crews with mission planning and flight briefs.
 
     - METICULOUS PLANNER. Led weekly operational planning meetings with HSM Wing representatives to coordinate flight support requirements across nine squadrons, resulting in the execution of 250 mishap-free flight hours and 95 simulator hours for HSMWSP cadre. 
 
     - DILIGENT PROFESSIONAL. During SHARP 7.0 updates HSMWSP operations did not have the necessary information for safely creating a flight schedule. LT Buck volunteered to fix this issue and spent over 20 hours, in addition to his schedule writing duties to identify the affected reports and formulate and implement solutions. Always ready to help, LT Buck spent over 15 hours assisting HSM-77 with FCF procedures. 
 
-    ***PROMOTE NOW TO LCDR AND SELECT FOR AVIATION DEPARTMENT HEAD!***
+    ***PROMOTE NOW TO {{next-rank}} AND SELECT FOR AVIATION DEPARTMENT HEAD!***
 
     Request: """${details.trim()}"""
     Output:`
@@ -77,8 +77,8 @@ export const POST: RequestHandler = async (event) => {
     const completionOpts: CreateCompletionRequest = {
       model: 'text-davinci-003',
       prompt,
-      max_tokens: 200,
-      temperature: 0.5,
+      max_tokens: 800,
+      temperature: 0.75,
       stream: true
     }
 

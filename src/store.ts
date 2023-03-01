@@ -8,3 +8,5 @@ export interface Accomplishment {
 }
 
 export let accomplishments = writable<Array<Accomplishment>>([])
+
+export let user_name = writable<string>('')

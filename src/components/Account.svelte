@@ -4,9 +4,10 @@
 	import { supabase } from '$lib/supabaseClient';
 	import { page } from '$app/stores';
 	import { menu, ProgressBar, ProgressRadial } from '@skeletonlabs/skeleton';
+	import { user_name } from '../store';
 
 	// export let session: AuthSession;
-	let session: AuthSession = $page.data.session;
+	let session: AuthSession | null = $page.data.session;
 
 	let loading = false;
 	let username: string | null = null;
@@ -23,7 +24,7 @@
 	const getProfile = async () => {
 		try {
 			loading = true;
-			const { user } = session;
+			const { user } = <AuthSession>session;
 
 			const { data, error, status } = await supabase
 				.from('profiles')
@@ -35,6 +36,7 @@
 				username = data.username;
 				website = data.website;
 				avatarUrl = data.avatar_url;
+				$user_name = username === null ? '' : username
 			}
 
 			if (error && status !== 406) throw error;
@@ -50,14 +52,14 @@
 	async function updateProfile() {
 		try {
 			loading = true;
-			const { user } = session;
+			const { user } =  <AuthSession>session;;
 
 			const updates = {
 				id: user.id,
 				username,
 				website,
 				avatar_url: avatarUrl,
-				updated_at: new Date()
+				updated_at: new Date().toISOString()
 			};
 
 			let { error } = await supabase.from('profiles').upsert(updates);
@@ -100,7 +102,7 @@
 					<input id="email" type="email" value={session.user.email} disabled />
 				</label>
 				<label class="input-label my-4" for="username">
-					<span>Name</span>
+					<span>Name & Rank</span>
 					<input id="username" type="text" bind:value={username} />
 				</label>
 				<label class="input-label my-4" for="website">
